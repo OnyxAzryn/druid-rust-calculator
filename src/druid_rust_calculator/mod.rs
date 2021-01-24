@@ -92,7 +92,7 @@ pub fn build_calc() -> impl Widget<CalcState> {
             flex_row(
                 op_button_label('c', "CE".to_string()),
                 op_button('C'),
-                op_button('⌫'),
+                op_button('D'),
                 op_button('÷'),
             ),
             1.0,
@@ -142,8 +142,8 @@ pub fn build_calc() -> impl Widget<CalcState> {
             flex_row(
                 op_button('%'),
                 op_button('^'),
-                op_button('<'),
-                op_button('>'),
+                op_button('«'),
+                op_button('»'),
             ),
             1.0,
         )

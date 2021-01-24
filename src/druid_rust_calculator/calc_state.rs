@@ -43,10 +43,10 @@ impl CalcState {
                 '×' => Some(self.operand.value.to_owned() * operand2.value),
                 '÷' => Some(self.operand.value.to_owned() / operand2.value),
                 '%' => Some(self.operand.value.to_owned() % operand2.value),
-                '<' => Some(Float::with_val(16,
+                '«' => Some(Float::with_val(16,
                     self.operand.value.to_owned().to_i32_saturating_round(Round::Up).unwrap()
                     << operand2.value.to_i32_saturating_round(Round::Up).unwrap())),
-                '>' => Some(Float::with_val(16,
+                '»' => Some(Float::with_val(16,
                     self.operand.value.to_owned().to_i32_saturating_round(Round::Up).unwrap()
                     >> operand2.value.to_i32_saturating_round(Round::Up).unwrap())),
                 '^' => Some(self.operand.value.to_owned().pow(operand2.value)),
@@ -62,7 +62,7 @@ impl CalcState {
 
     pub fn op(&mut self, op: char) {
         match op {
-            '+' | '−' | '×' | '÷' | '=' | '%' | '^' | '>' | '<'  => {
+            '+' | '−' | '×' | '÷' | '=' | '%' | '^' | '»' | '«'  => {
                 self.compute();
                 let temp = self.value.parse().unwrap_or(0.0);
                 self.operand = DruidFloat {
@@ -101,7 +101,7 @@ impl CalcState {
                 self.operator = 'C';
                 self.in_num = false;
             }
-            '⌫' => {
+            'D' => {
                 if self.in_num {
                     self.value.pop();
                     if self.value.is_empty() || self.value == "−" {

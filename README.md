@@ -9,4 +9,4 @@ Changes:
 
 Current Interface:
 
-![Current Interface](https://i.imgur.com/XcyeXhi.png)
+![Current Interface](https://i.imgur.com/FtLVCi5.png)
