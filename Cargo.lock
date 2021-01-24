@@ -306,6 +306,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "druid_rust_calculator"
+version = "0.1.0"
+dependencies = [
+ "druid",
+ "rug",
+]
+
+[[package]]
 name = "dwrote"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1050,14 +1058,6 @@ dependencies = [
  "az",
  "gmp-mpfr-sys",
  "libc",
-]
-
-[[package]]
-name = "rui"
-version = "0.1.0"
-dependencies = [
- "druid",
- "rug",
 ]
 
 [[package]]

@@ -1,5 +1,5 @@
 [package]
-name = "rui"
+name = "druid_rust_calculator"
 version = "0.1.0"
 authors = ["Onyx Azryn <brycekabat@onyxazryn.com>"]
 edition = "2018"
