@@ -1,6 +1,6 @@
 // External Crates
 use druid::{Data, Lens};
-use rug::Float;
+use rug::{Float, ops::Pow, float::Round};
 
 // Use druid_float from module
 use super::druid_float::DruidFloat;
@@ -42,6 +42,14 @@ impl CalcState {
                 '−' => Some(self.operand.value.to_owned() - operand2.value),
                 '×' => Some(self.operand.value.to_owned() * operand2.value),
                 '÷' => Some(self.operand.value.to_owned() / operand2.value),
+                '%' => Some(self.operand.value.to_owned() % operand2.value),
+                '<' => Some(Float::with_val(16,
+                    self.operand.value.to_owned().to_i32_saturating_round(Round::Up).unwrap()
+                    << operand2.value.to_i32_saturating_round(Round::Up).unwrap())),
+                '>' => Some(Float::with_val(16,
+                    self.operand.value.to_owned().to_i32_saturating_round(Round::Up).unwrap()
+                    >> operand2.value.to_i32_saturating_round(Round::Up).unwrap())),
+                '^' => Some(self.operand.value.to_owned().pow(operand2.value)),
                 _ => None,
             };
             if let Some(result) = result {
@@ -54,7 +62,7 @@ impl CalcState {
 
     pub fn op(&mut self, op: char) {
         match op {
-            '+' | '−' | '×' | '÷' | '=' => {
+            '+' | '−' | '×' | '÷' | '=' | '%' | '^' | '>' | '<'  => {
                 self.compute();
                 let temp = self.value.parse().unwrap_or(0.0);
                 self.operand = DruidFloat {

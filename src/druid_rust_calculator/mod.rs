@@ -32,6 +32,7 @@ fn op_button_label(op: char, label: String) -> impl Widget<CalcState> {
         .on_click(move |_ctx, data: &mut CalcState, _env| data.op(op))
 }
 
+// Wrapper for op_button_label that just uses the same string for label
 fn op_button(op: char) -> impl Widget<CalcState> {
     op_button_label(op, op.to_string())
 }
@@ -39,15 +40,16 @@ fn op_button(op: char) -> impl Widget<CalcState> {
 fn digit_button(digit: u8) -> impl Widget<CalcState> {
     let painter = Painter::new(|ctx, _, env| {
         let bounds = ctx.size().to_rect();
-
+        // ?
         ctx.fill(bounds, &env.get(theme::BACKGROUND_LIGHT));
 
+        // Outline when hovering
         if ctx.is_hot() {
-            ctx.stroke(bounds.inset(-0.5), &Color::WHITE, 1.0);
+            ctx.stroke(bounds.inset(-0.5), &Color::BLACK, 1.0);
         }
-
+        // Color after button press
         if ctx.is_active() {
-            ctx.fill(bounds, &Color::rgb8(0x71, 0x71, 0x71));
+            ctx.fill(bounds, &Color::rgb8(0x71, 0x0, 0x0));
         }
     });
 
@@ -132,6 +134,16 @@ pub fn build_calc() -> impl Widget<CalcState> {
                 digit_button(0),
                 op_button('.'),
                 op_button('='),
+            ),
+            1.0,
+        )
+        .with_spacer(1.0)
+        .with_flex_child(
+            flex_row(
+                op_button('%'),
+                op_button('^'),
+                op_button('<'),
+                op_button('>'),
             ),
             1.0,
         )
